@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ thống chiếu sáng - Vũ Văn Huy</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .btn { padding: 15px 30px; font-size: 16px; color: white; border: none; cursor: pointer; margin: 10px; border-radius: 5px; }
+        .btn-on { background-color: #28a745; }
+        .btn-off { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+    <h1>HỆ THỐNG CHIẾU SÁNG THÔNG MINH - VŨ VĂN HUY</h1>
+    <div class="info">Cường độ ánh sáng: --</div>
+    <div class="info">Trạng thái đèn: <span id="status" style="font-weight: bold; color: green;">OFF</span></div>
+
+    <div class="button-group">
+        <button class="btn btn-on" onclick="dieuKhienDen('ON')">BẬT ĐÈN</button>
+        <button class="btn btn-off" onclick="dieuKhienDen('OFF')">TẮT ĐÈN</button>
+    </div>
+
+    <script>
+        // Cấu hình Firebase của bạn
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Hàm xử lý khi bấm nút
+        function dieuKhienDen(trangThai) {
+            database.ref('trangThaiDen').set(trangThai);
+            document.getElementById('status').innerText = trangThai;
+        }
+    </script>
+</body>
+</html>
